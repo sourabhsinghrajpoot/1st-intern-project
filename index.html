@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Search Interface</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .search-container {
+      width: 100%;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .dropdown {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .dropdown button {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #f9f9f9;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: left;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      list-style: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown-menu li:hover {
+      background: #f0f0f0;
+    }
+
+    .search-field {
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-field input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #e86c6c;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .search-field button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #c33d26;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .search-field button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="search-container">
+    <div class="dropdown">
+      <button id="dropdownButton">Everything</button>
+      <ul class="dropdown-menu" id="dropdownMenu">
+        <li>Everything</li>
+        <li>Software Development</li>
+        <li>Web Development</li>
+        <li>Data Analyst</li>
+        <li>IT Consultant</li>
+        <li>Network Administrator</li>
+      </ul>
+    </div>
+    <div class="search-field">
+      <input type="text" placeholder="Enter your query here">
+      <button>Search</button>
+    </div>
+  </div>
+
+  <script>
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    dropdownButton.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
+    dropdownMenu.addEventListener('click', (e) => {
+      if (e.target.tagName === 'LI') {
+        dropdownButton.textContent = e.target.textContent;
+        dropdownMenu.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+</html>
